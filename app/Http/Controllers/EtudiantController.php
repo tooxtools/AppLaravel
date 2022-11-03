@@ -35,6 +35,7 @@ class EtudiantController extends Controller
 
     public function delete(Etudiant $etudiant){
         $etudiant->delete();
+       // dd($etudiant->delete());
         
         return back()->with("successDelete","Etudiant supprimer avec succès!");
     }
