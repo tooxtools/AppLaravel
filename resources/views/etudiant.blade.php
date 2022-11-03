@@ -41,7 +41,7 @@
                         <td><a href="#" class="btn btn-info">Editer</a>
                             <a href="#" class="btn btn-danger" onclick="if(
                                 confirm('voulez-vous vraiment supprimer cet étudiant ?')
-                                ){document.getElementById('$etudiant->id').submit()}">Supprimer</a>
+                                ){document.getElementById('form-{{$etudiant->id}}').submit()}">Supprimer</a>
                         </td>
                     </tr>
                     <!-- <tr>
@@ -49,13 +49,18 @@
                         <td colspan="2">Larry the Bird</td>
                         <td>@twitter</td>
                     </tr> -->
-                    @endforeach
-                </tbody>
-                <form id="$etudiant->id" method="post" action=" {{route('etudiant.supprimer', ['etudiant'=>$etudiant->id] )}}" >
+                <form id="form-{{$etudiant->id}}" method="post" action=" {{route('etudiant.supprimer', ['etudiant'=>$etudiant->id] )}}" >
                     @csrf
                     @method('delete') 
                     <input type="hidden" name="_method" value="delete">
                 </form>
+                    @endforeach
+                </tbody>
+                <!-- <form id="form-{{$etudiant->id}}" method="post" action=" {{route('etudiant.supprimer', ['etudiant'=>$etudiant->id] )}}" >
+                    @csrf
+                    @method('delete') 
+                    <input type="hidden" name="_method" value="delete">
+                </form> -->
             </div>
         </table>
 
