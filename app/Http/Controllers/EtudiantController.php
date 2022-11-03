@@ -23,23 +23,44 @@ class EtudiantController extends Controller
     public function store(Request  $request)
     {
         $request->validate([
-            "nom"=>"required",
-            "prenom"=>"required",
-            "classe_id"=>"required",
+            "nom" => "required",
+            "prenom" => "required",
+            "classe_id" => "required",
         ]);
 
-         Etudiant::create($request->all());
+        Etudiant::create($request->all());
         // dd(Etudiant::create($request->all()));
-         return back()->with("success","Etudiant ajouter avec succès!");
+        return back()->with("success", "Etudiant ajouter avec succès!");
     }
 
-    public function delete(Etudiant $etudiant){
-        dd($etudiant);
+    public function delete(Etudiant $etudiant)
+    {
+        $nom_complet = $etudiant->nom . " " . $etudiant->prenom;
+        //dd($etudiant);
         $etudiant->delete();
-      // Etudiant::find($etudiant->id)->delete();
-        //dd($etudiant->delete());
-        
-        return back()->with("successDelete","Etudiant supprimer avec succès!");
+        // Etudiant::find($etudiant->id)->delete();
+
+
+        return back()->with("successDelete", "L'Etudiant '$nom_complet' supprimé avec succès!");
     }
-   
+
+    #######################################################################
+    public function update(Request  $request, Etudiant $etudiant)
+    {
+        $request->validate([
+            "nom" => "required",
+            "prenom" => "required",
+            "classe_id" => "required",
+        ]);
+
+        $etudiant->update($request->all());
+        // dd(Etudiant::create($request->all()));
+        return back()->with("success", "Etudiant mise à jour avec succès!");
+    }
+
+    public function edit(Etudiant $etudiant)
+    {
+        $classes = Classe::all();
+        return view("editEtudiant", compact("etudiant", "classes"));
+    }
 }

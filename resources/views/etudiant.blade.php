@@ -38,7 +38,7 @@
                         <td>{{$etudiant->nom}}</td>
                         <td>{{$etudiant->prenom}}</td>
                         <td>{{$etudiant->classe->libelle}}</td>
-                        <td><a href="#" class="btn btn-info">Editer</a>
+                        <td><a href="{{route('etudiant.edit', ['etudiant'=>$etudiant->id])}}" class="btn btn-info">Editer</a>
                             <a href="#" class="btn btn-danger" onclick="if(
                                 confirm('voulez-vous vraiment supprimer cet étudiant ?')
                                 ){document.getElementById('form-{{$etudiant->id}}').submit()}">Supprimer</a>
@@ -51,7 +51,7 @@
                     </tr> -->
                 <form id="form-{{$etudiant->id}}" method="post" action=" {{route('etudiant.supprimer', ['etudiant'=>$etudiant->id] )}}" >
                     @csrf
-                    @method('delete') 
+                    
                     <input type="hidden" name="_method" value="delete">
                 </form>
                     @endforeach
